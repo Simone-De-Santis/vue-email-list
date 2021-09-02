@@ -4,14 +4,26 @@ Vue.config.devtools = true;
 const app = new Vue({
     el: "#app",
     data: {
-        mail: ""
+        mailList: [],
 
     },
     methods: {},
     created() {
-        axios.get("https://flynn.boolean.careers/exercises/api/random/mail").then((res) => {
-            this.mail = res.data.response;
-        });
+        for (let i = 0; i < 10; i++) {
+            axios.get("https://flynn.boolean.careers/exercises/api/random/mail").then((res) => {
+                // run in caso di nessun errore
+                const mail = res.data.response;
+                this.mailList.push(mail);
+            }).catch((error) => {
+                // run in caso di errore
+                console.log(error);
+            }).then(() => {
+                // run in ogni caso
+
+            })
+
+
+        }
     },
 });
 
